@@ -1,0 +1,1 @@
+1. запуск тестов - python manage.py test
