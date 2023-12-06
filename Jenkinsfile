@@ -40,7 +40,7 @@ pipeline {
         stage("build") {
             agent any
             steps {
-                sh 'docker build . -t ${IMAGE_NAME}:%{GIT_COMMIT}'
+                sh 'docker build . -t ${IMAGE_NAME}:${GIT_COMMIT}'
             }
         }
     }
