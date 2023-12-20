@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  server:
+    image: elinka/django_demo:latest
+    ports:
+      - 8094:80
