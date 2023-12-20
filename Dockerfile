@@ -2,6 +2,6 @@ FROM python:latest
 
 COPY . .
 
-RUN pip instll -r requirements.txt
+RUN pip install -r requirements.txt
 
 CMD ["python", "-m", "uvicorn", "django_demo_site.asgi:application"]
