@@ -2,6 +2,7 @@ pipeline {
     agent none
     environment {
         IMAGE_NAME = 'elinka/django_demo'
+        HUB_CRED_ID = 'elinka_docker_hub'
     }
     stages {
         stage("deps") {
@@ -12,7 +13,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'pip install --user -r requirements.txt'
             }
         }
         stage("test") {
@@ -41,6 +42,16 @@ pipeline {
             agent any
             steps {
                 sh 'docker build . -t ${IMAGE_NAME}:${GIT_COMMIT}'
+            }
+        }
+        stage("push") {
+            agent any
+            steps {
+                withCredentials([usernamePassword(credentialsId: "${HUB_CRED_ID}",
+                usernameVariable: 'HUB_USERNAME', passwordVariable: 'HUB_PASSWORD')]) {
+                    sh 'docker login -u ${HUB_USERNAME} -p ${HUB_PASSWORD}'
+                    sh 'docker push ${IMAGE_NAME}:${GIT_COMMIT}'
+                }
             }
         }
     }
