@@ -3,6 +3,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'elinka/django_demo'
         HUB_CRED_ID = 'elinka_docker_hub'
+        PROJECT_DIR = 'Миллер_Элина_django_demo'
     }
     stages {
         stage("deps") {
