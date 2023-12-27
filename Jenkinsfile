@@ -78,7 +78,7 @@ pipeline {
                 withCredentials(
                     [
                         string(credentialsId: "production_ip", variable: 'SERVER_IP'),
-                        sshUserPrivateKey(credentialsId: "production_key", keyFileVariable: 'SERVER_KEY', usernameVariable: 'SERVER_USERNAME)')
+                        sshUserPrivateKey(credentialsId: "production_key", keyFileVariable: 'SERVER_KEY', usernameVariable: 'SERVER_USERNAME')
                     ]
                 ) {
                     sh 'scp -i ${SERVER_KEY} miller.prod.mshp-devops.com.conf ${SERVER_USERNAME}@${SERVER_IP}:nginx'
